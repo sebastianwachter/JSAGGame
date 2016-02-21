@@ -38,14 +38,14 @@ var Game = {
     
     createSnake: function (value) {
         for (var i = 0; i < value; i++) {
-            this.snake[i] = game.add.sprite((game.world.width / 2 + i * this.size) - this.size / 2, game.world.height / 2 - this.size / 2, 'snake');
+            this.snake[i] = game.add.sprite((210, 210, 'snake');
         }
         console.log(this.snake);
     },
     
     createFood: function () {
-        var xPosition = 10 + Math.floor(Math.random() * 18) * this.size,
-            yPosition = 10 + Math.floor(Math.random() * 10) * this.size;
+        var xPosition = Math.floor(Math.random() * 18) * this.size,
+            yPosition = Math.floor(Math.random() * 10) * this.size;
             
         this.food = game.add.sprite(xPosition, yPosition, 'food');
     }
