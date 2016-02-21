@@ -13,7 +13,7 @@ var Game = {
         this.score = 0;
         this.speed = 0;
         this.delay = 0;
-        this.direction = 'left';
+        this.direction = 'right';
         this.nextDirection = null;
         this.sated = false;
         this.textRed = { font: 'bold 25px Arial', fill: '#F00', align: 'center' };
@@ -74,20 +74,56 @@ var Game = {
             
             this.snake.push(lastPart);
             firstPart = lastPart;
+            
+            if (this.addNew) {
+                this.snake.unshift(game.add.sprite(oldLastPartx, oldLastParty, 'snake'));
+                this.addNew = false;
+            }
+            
+            this.eatFood();
+            this.eatSelf(firstPart);
+            this.hitWall(firstPart);
         }
     },
     
     createSnake: function (value) {
         for (var i = 0; i < value; i++) {
-            this.snake[i] = game.add.sprite((game.world.width / 2 + i * this.size) - this.size / 2, game.world.height / 2 - this.size / 2, 'snake');
+            this.snake[i] = game.add.sprite(210, 210, 'snake');
         }
-        console.log(this.snake);
     },
     
     createFood: function () {
-        var xPosition = 10 + Math.floor(Math.random() * 18) * this.size,
-            yPosition = 10 + Math.floor(Math.random() * 10) * this.size;
+        var xPosition = Math.floor(Math.random() * 18) * this.size,
+            yPosition = Math.floor(Math.random() * 10) * this.size;
             
         this.food = game.add.sprite(xPosition, yPosition, 'food');
+    },
+    
+    eatFood: function  () {
+        for (var i = 0; i < this.snake.length; i++) {
+            if (this.snake[i].x == this.food.x && this.snake[i].y == this.food.y) {
+                this.addNew = true;
+                this.food.destroy();
+                this.createFood();
+                this.score++;
+                this.scoreValue.text = this.score.toString();
+            }
+        }
+    },
+    
+    eatSelf: function (firstPart) {
+        for (var i = 0; i < this.snake.length - 1; i++) {
+            if (firstPart.x == this.snake[i].x && firstPart.y == this.snake[i].y) {
+                //game.state.start('game_over');
+                console.log('you would be dead now');
+            }
+        }
+    },
+    
+    hitWall: function (firstPart) {
+        if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y <0) {
+            //game.state.start('game_over');
+            console.log('you would be dead now');
+        }
     }
 }
