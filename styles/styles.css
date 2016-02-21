@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'blowbrush';
+    src: url('../fonts/blowbrush.otf');
+}
+
+body {
+    font-family: blowbrush;
+}
+
+h1 {
+    font-size: 150px;
+}
+
+div {
+    font-size: 50px;
+    font-size: 50px;
+}
+
+.button {
+    margin-top: 260px;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: red;
+}
+
+#gameDiv {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+.menuWrapper {
+    display: none;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+    width: 900px;
+    left: 50%;
+    top: 20%;
+}
+
+.gameOverWrapper {
+    display: none;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+    width: 900px;
+    left: 50%;
+    top: 20%;
+}

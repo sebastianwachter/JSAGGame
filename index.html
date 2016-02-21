@@ -1,11 +1,23 @@
 <html>
     <head>
         <title>JS AG Game</title>
+        <link href="styles/styles.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/libs/phaser.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-2.2.0.min.js"></script>
 	    <script type="text/javascript" src="js/game.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/gameover.js"></script>
 	    <script type="text/javascript" src="js/main.js"></script>
     </head>
     <body>
         <div id="gameDiv"></div>
+        <div class="menuWrapper">
+            <h1>Phaser Snake</h1>
+            <div class="button play">Play the game!</div>
+        </div>
+        <div class="gameOverWrapper">
+            <h1>Game Over!</h1>
+            <div class="button play">Play again!</div>
+        </div>
     </body>
 </html>

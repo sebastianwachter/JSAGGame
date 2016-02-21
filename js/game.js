@@ -1,7 +1,6 @@
 var Game = {
     
     preload: function () {
-        game.load.image('background', './assets/background.png');
         game.load.image('snake', './assets/snakePart.png');
         game.load.image('food', './assets/food.png');
     }, 
@@ -16,7 +15,7 @@ var Game = {
         this.direction = 'right';
         this.nextDirection = null;
         this.sated = false;
-        this.textRed = { font: 'bold 25px Arial', fill: '#F00', align: 'center' };
+        this.textRed = { font: 'bold 25px blowbrush', fill: '#F00', align: 'center' };
         
         this.cursors = game.input.keyboard.createCursorKeys();
         
@@ -114,16 +113,14 @@ var Game = {
     eatSelf: function (firstPart) {
         for (var i = 0; i < this.snake.length - 1; i++) {
             if (firstPart.x == this.snake[i].x && firstPart.y == this.snake[i].y) {
-                //game.state.start('game_over');
-                console.log('you would be dead now');
+                game.state.start('game_over');
             }
         }
     },
     
     hitWall: function (firstPart) {
         if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y <0) {
-            //game.state.start('game_over');
-            console.log('you would be dead now');
+            game.state.start('game_over');
         }
     }
 }
