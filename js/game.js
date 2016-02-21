@@ -33,7 +33,48 @@ var Game = {
     },
     
     update: function () {
+        if (this.cursors.right.isDown && this.direction != 'left') {
+            this.nextDirection = 'right';
+        } else if (this.cursors.left.isDown && this.direction != 'right') {
+            this.nextDirection = 'left';
+        } else if (this.cursors.up.isDown && this.direction != 'down') {
+            this.nextDirection = 'up';
+        } else if (this.cursors.down.isDown && this.direction != 'up') {
+            this.nextDirection = 'down';
+        }
         
+        this.speed = Math.min(10, Math.floor(this.score / 5));
+        
+        this.delay++;
+        
+        if (this.delay % (20 - this.speed) == 0) {
+            var firstPart = this.snake[this.snake.length - 1],
+                lastPart = this.snake.shift(),
+                oldLastPartx = lastPart.x,
+                oldLastParty = lastPart.y;
+                
+            if (this.nextDirection) {
+                this.direction = this.nextDirection;
+                this.nextDirection = null;
+            }
+            
+            if (this.direction == 'right') {
+                lastPart.x = firstPart.x + this.size;
+                lastPart.y = firstPart.y;
+            } else if (this.direction == 'left') {
+                lastPart.x = firstPart.x - this.size;
+                lastPart.y = firstPart.y;
+            } else if (this.direction == 'up') {
+                lastPart.x = firstPart.x;
+                lastPart.y = firstPart.y - this.size;
+            } else if (this.direction == 'down') {
+                lastPart.x = firstPart.x;
+                lastPart.y = firstPart.y + this.size;
+            }
+            
+            this.snake.push(lastPart);
+            firstPart = lastPart;
+        }
     },
     
     createSnake: function (value) {
