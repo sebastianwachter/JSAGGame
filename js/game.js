@@ -81,7 +81,6 @@ var Game = {
         for (var i = 0; i < value; i++) {
             this.snake[i] = game.add.sprite((game.world.width / 2 + i * this.size) - this.size / 2, game.world.height / 2 - this.size / 2, 'snake');
         }
-        console.log(this.snake);
     },
     
     createFood: function () {
