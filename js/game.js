@@ -96,7 +96,7 @@ var Game = {
     createFood() {
         var random = (n) => Math.floor(Math.random() * n);
 
-        var xPosition = random(17) * this.size;
+        var xPosition = random(18) * this.size;
         var yPosition = random(10) * this.size;
 
         this.food = game.add.sprite(xPosition, yPosition, 'food');
