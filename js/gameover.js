@@ -1,4 +1,6 @@
-var game_over = {
+'use strict';
+
+var GameOver = {
 
     create: function () {
         $('.gameOverWrapper').show();

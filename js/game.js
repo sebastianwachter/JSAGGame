@@ -1,3 +1,5 @@
+'use strict';
+
 var Game = {
 
     preload: function () {
