@@ -125,7 +125,7 @@ var Game = {
     hitWall(firstPart) {
         var x = firstPart.x;
         var y = firstPart.y;
-        if (x >= 1280 || x < 0 || y >= 720 || y < 0) {
+        if (x >= 1210 || x < 0 || y >= 650 || y < 0) {
             game.state.start('GameOver');
         }
     }
