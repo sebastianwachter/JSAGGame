@@ -1,10 +1,10 @@
 var Game = {
-    
+
     preload: function () {
         game.load.image('snake', './assets/snakePart.png');
         game.load.image('food', './assets/food.png');
-    }, 
-    
+    },
+
     create: function () {
         this.snake = [];
         this.food = {};
@@ -16,21 +16,21 @@ var Game = {
         this.nextDirection = null;
         this.sated = false;
         this.textRed = { font: 'bold 25px blowbrush', fill: '#F00', align: 'center' };
-        
+
         this.cursors = game.input.keyboard.createCursorKeys();
-        
+
         var background = game.add.sprite(0, 0, 'background');
         background.height = game.height;
         background.width = game.width;
-        
+
         this.createSnake(5);
-        
+
         this.createFood();
-        
+
         game.add.text(10, 10, 'SCORE:', this.textRed);
         this.scoreValue = game.add.text(115, 10, this.score.toString(), this.textRed);
     },
-    
+
     update: function () {
         if (this.cursors.right.isDown && this.direction != 'left') {
             this.nextDirection = 'right';
@@ -41,22 +41,22 @@ var Game = {
         } else if (this.cursors.down.isDown && this.direction != 'up') {
             this.nextDirection = 'down';
         }
-        
+
         this.speed = Math.min(10, Math.floor(this.score / 5));
-        
+
         this.delay++;
-        
+
         if (this.delay % (20 - this.speed) == 0) {
             var firstPart = this.snake[this.snake.length - 1],
                 lastPart = this.snake.shift(),
                 oldLastPartx = lastPart.x,
                 oldLastParty = lastPart.y;
-                
+
             if (this.nextDirection) {
                 this.direction = this.nextDirection;
                 this.nextDirection = null;
             }
-            
+
             if (this.direction == 'right') {
                 lastPart.x = firstPart.x + this.size;
                 lastPart.y = firstPart.y;
@@ -70,34 +70,34 @@ var Game = {
                 lastPart.x = firstPart.x;
                 lastPart.y = firstPart.y + this.size;
             }
-            
+
             this.snake.push(lastPart);
             firstPart = lastPart;
-            
+
             if (this.addNew) {
                 this.snake.unshift(game.add.sprite(oldLastPartx, oldLastParty, 'snake'));
                 this.addNew = false;
             }
-            
+
             this.eatFood();
             this.eatSelf(firstPart);
             this.hitWall(firstPart);
         }
     },
-    
+
     createSnake: function (value) {
         for (var i = 0; i < value; i++) {
             this.snake[i] = game.add.sprite(210, 210, 'snake');
         }
     },
-    
+
     createFood: function () {
         var xPosition = Math.floor(Math.random() * 18) * this.size,
             yPosition = Math.floor(Math.random() * 10) * this.size;
-            
+
         this.food = game.add.sprite(xPosition, yPosition, 'food');
     },
-    
+
     eatFood: function  () {
         for (var i = 0; i < this.snake.length; i++) {
             if (this.snake[i].x == this.food.x && this.snake[i].y == this.food.y) {
@@ -109,7 +109,7 @@ var Game = {
             }
         }
     },
-    
+
     eatSelf: function (firstPart) {
         for (var i = 0; i < this.snake.length - 1; i++) {
             if (firstPart.x == this.snake[i].x && firstPart.y == this.snake[i].y) {
@@ -117,7 +117,7 @@ var Game = {
             }
         }
     },
-    
+
     hitWall: function (firstPart) {
         if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y <0) {
             game.state.start('game_over');
