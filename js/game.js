@@ -115,14 +115,14 @@ var Game = {
     eatSelf: function (firstPart) {
         for (var i = 0; i < this.snake.length - 1; i++) {
             if (firstPart.x === this.snake[i].x && firstPart.y === this.snake[i].y) {
-                game.state.start('game_over');
+                game.state.start('GameOver');
             }
         }
     },
 
     hitWall: function (firstPart) {
         if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y < 0) {
-            game.state.start('game_over');
+            game.state.start('GameOver');
         }
     }
 }
