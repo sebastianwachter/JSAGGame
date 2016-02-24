@@ -1,0 +1,36 @@
+extends: "eslint:recommended"
+
+env:
+  node: false
+  browser: true
+  es6: true
+  jquery: true
+
+globals:
+  Phaser: true
+  game: true
+
+rules:
+  no-console: 0
+  comma-dangle: 0
+  eqeqeq: 1
+  no-extra-bind: 1
+  no-implied-eval: 2
+  no-unused-vars: 0
+  strict:
+    - 1
+    - "global"
+  space-infix-ops:
+    - 1
+    - int32Hint: true
+  quotes:
+    - 1
+    - "single"
+  object-curly-spacing:
+    - 1
+    - "always"
+  no-trailing-spaces: 1
+  eol-last: 2
+  brace-style: 1
+  camelcase: 1
+  no-spaced-func: 2

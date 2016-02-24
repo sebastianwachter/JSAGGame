@@ -1,3 +1,4 @@
+/* globals Menu, Game, GameOver */
 'use strict';
 
 var game = new Phaser.Game(1260, 700, Phaser.AUTO, 'gameDiv');

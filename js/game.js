@@ -34,13 +34,13 @@ var Game = {
     },
 
     update: function () {
-        if (this.cursors.right.isDown && this.direction != 'left') {
+        if (this.cursors.right.isDown && this.direction !== 'left') {
             this.nextDirection = 'right';
-        } else if (this.cursors.left.isDown && this.direction != 'right') {
+        } else if (this.cursors.left.isDown && this.direction !== 'right') {
             this.nextDirection = 'left';
-        } else if (this.cursors.up.isDown && this.direction != 'down') {
+        } else if (this.cursors.up.isDown && this.direction !== 'down') {
             this.nextDirection = 'up';
-        } else if (this.cursors.down.isDown && this.direction != 'up') {
+        } else if (this.cursors.down.isDown && this.direction !== 'up') {
             this.nextDirection = 'down';
         }
 
@@ -48,7 +48,7 @@ var Game = {
 
         this.delay++;
 
-        if (this.delay % (20 - this.speed) == 0) {
+        if (this.delay % (20 - this.speed) === 0) {
             var firstPart = this.snake[this.snake.length - 1],
                 lastPart = this.snake.shift(),
                 oldLastPartx = lastPart.x,
@@ -59,16 +59,16 @@ var Game = {
                 this.nextDirection = null;
             }
 
-            if (this.direction == 'right') {
+            if (this.direction === 'right') {
                 lastPart.x = firstPart.x + this.size;
                 lastPart.y = firstPart.y;
-            } else if (this.direction == 'left') {
+            } else if (this.direction === 'left') {
                 lastPart.x = firstPart.x - this.size;
                 lastPart.y = firstPart.y;
-            } else if (this.direction == 'up') {
+            } else if (this.direction === 'up') {
                 lastPart.x = firstPart.x;
                 lastPart.y = firstPart.y - this.size;
-            } else if (this.direction == 'down') {
+            } else if (this.direction === 'down') {
                 lastPart.x = firstPart.x;
                 lastPart.y = firstPart.y + this.size;
             }
@@ -102,7 +102,7 @@ var Game = {
 
     eatFood: function  () {
         for (var i = 0; i < this.snake.length; i++) {
-            if (this.snake[i].x == this.food.x && this.snake[i].y == this.food.y) {
+            if (this.snake[i].x === this.food.x && this.snake[i].y === this.food.y) {
                 this.addNew = true;
                 this.food.destroy();
                 this.createFood();
@@ -114,14 +114,14 @@ var Game = {
 
     eatSelf: function (firstPart) {
         for (var i = 0; i < this.snake.length - 1; i++) {
-            if (firstPart.x == this.snake[i].x && firstPart.y == this.snake[i].y) {
+            if (firstPart.x === this.snake[i].x && firstPart.y === this.snake[i].y) {
                 game.state.start('game_over');
             }
         }
     },
 
     hitWall: function (firstPart) {
-        if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y <0) {
+        if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y < 0) {
             game.state.start('game_over');
         }
     }
