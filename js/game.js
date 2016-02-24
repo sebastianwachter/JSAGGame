@@ -2,12 +2,12 @@
 
 var Game = {
 
-    preload: function () {
+    preload() {
         game.load.image('snake', './assets/snakePart.png');
         game.load.image('food', './assets/food.png');
     },
 
-    create: function () {
+    create() {
         this.snake = [];
         this.food = {};
         this.size = 70;
@@ -33,7 +33,7 @@ var Game = {
         this.scoreValue = game.add.text(115, 10, this.score.toString(), this.textRed);
     },
 
-    update: function () {
+    update() {
         if (this.cursors.right.isDown && this.direction !== 'left') {
             this.nextDirection = 'right';
         } else if (this.cursors.left.isDown && this.direction !== 'right') {
@@ -87,32 +87,34 @@ var Game = {
         }
     },
 
-    createSnake: function (value) {
+    createSnake(value) {
         for (var i = 0; i < value; i++) {
             this.snake[i] = game.add.sprite(210, 210, 'snake');
         }
     },
 
-    createFood: function () {
-        var xPosition = Math.floor(Math.random() * 18) * this.size,
-            yPosition = Math.floor(Math.random() * 10) * this.size;
+    createFood() {
+        var random = (n) => Math.floor(Math.random() * n);
+
+        var xPosition = random(17) * this.size;
+        var yPosition = random(10) * this.size;
 
         this.food = game.add.sprite(xPosition, yPosition, 'food');
     },
 
-    eatFood: function  () {
-        for (var i = 0; i < this.snake.length; i++) {
-            if (this.snake[i].x === this.food.x && this.snake[i].y === this.food.y) {
+    eatFood() {
+        this.snake.forEach((segment) => {
+            if (segment.x === this.food.x && segment.y === this.food.y) {
                 this.addNew = true;
                 this.food.destroy();
                 this.createFood();
                 this.score++;
                 this.scoreValue.text = this.score.toString();
             }
-        }
+        });
     },
 
-    eatSelf: function (firstPart) {
+    eatSelf(firstPart) {
         for (var i = 0; i < this.snake.length - 1; i++) {
             if (firstPart.x === this.snake[i].x && firstPart.y === this.snake[i].y) {
                 game.state.start('GameOver');
@@ -120,9 +122,11 @@ var Game = {
         }
     },
 
-    hitWall: function (firstPart) {
-        if (firstPart.x >= 1280 || firstPart.x < 0 || firstPart.y >= 720 || firstPart.y < 0) {
+    hitWall(firstPart) {
+        var x = firstPart.x;
+        var y = firstPart.y;
+        if (x >= 1280 || x < 0 || y >= 720 || y < 0) {
             game.state.start('GameOver');
         }
     }
-}
+};
