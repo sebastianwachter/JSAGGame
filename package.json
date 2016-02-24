@@ -1,0 +1,24 @@
+{
+  "name": "jsag-game",
+  "version": "1.0.0",
+  "description": "This is a repo for a talk I hold at ADV Böblingen about game development in JavaScript. This is a snake game written in JS using phaser.io.",
+  "main": "package.json",
+  "scripts": {
+    "test": "eslint . --ignore-path .gitignore --ignore-pattern **/*.min.js",
+    "start": "browser-sync start --server --files '**/*, !node_modules'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastianwachter/JSAGGame.git"
+  },
+  "author": "Sebastian Wachter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sebastianwachter/JSAGGame/issues"
+  },
+  "homepage": "https://github.com/sebastianwachter/JSAGGame#readme",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "eslint": "^2.2.0"
+  }
+}
