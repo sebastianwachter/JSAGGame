@@ -16,7 +16,6 @@ var Game = {
         this.delay = 0;
         this.direction = 'right';
         this.nextDirection = null;
-        this.sated = false;
         this.textRed = { font: 'bold 25px blowbrush', fill: '#F00', align: 'center' };
 
         this.cursors = game.input.keyboard.createCursorKeys();
@@ -90,6 +89,7 @@ var Game = {
     createSnake(value) {
         for (var i = 0; i < value; i++) {
             this.snake[i] = game.add.sprite(210, 210, 'snake');
+            //this.snake[i] = game.add.sprite(210 + (i * this.size), 210, 'snake');
         }
     },
 
@@ -125,7 +125,9 @@ var Game = {
     hitWall(firstPart) {
         var x = firstPart.x;
         var y = firstPart.y;
-        if (x >= 1210 || x < 0 || y >= 650 || y < 0) {
+        var worldBoundX = game.world.width - this.size;
+        var worldBoundY = game.world.height - this.size;
+        if (x > worldBoundX || x < 0 || y > worldBoundY || y < 0) {
             game.state.start('GameOver');
         }
     }
